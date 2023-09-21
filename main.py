@@ -16,17 +16,19 @@ async def check_btc(arr: dict):
         request = requests.get(
             f"https://blockchain.info/multiaddr?active={address}", timeout=15)
         if request.status_code == 200:
+            print(f"btc {request.status_code}")
             answer = request.json()
             for row in answer['addresses']:
                 if row["final_balance"] > 0 or row['n_tx'] > 0 or row['total_received'] > 0 or row['total_sent'] > 0:
+                    print(arr)
                     with open(f"D:\\PYTHON2\\CHECK\\1.txt", 'a') as f:
                     #with open(f"D:\\PYTHON\\TWO\\etherscan\\1.txt", 'a') as f:
                         f.write(f"{arr['btc']}")
                 #else:
                 #    print(f"BTC -- {row['address']} пустой")
         else:
-            print(f"{request.status_code}")
-            await asyncio.sleep(60)
+            print(f"btc {request.status_code}")
+            await asyncio.sleep(100)
     except:
         pass
 
@@ -46,7 +48,7 @@ async def check_eth(arr: dict) -> None:
     page = requests.get(url, headers=headers)
 
     if page.status_code == 200:
-        print(page.status_code)
+        print(f"eth {page.status_code}")
         soup = BeautifulSoup(page.text, "html.parser")
 
         # blockscan
@@ -92,7 +94,7 @@ async def check_eth(arr: dict) -> None:
         #    print(f"ETH -- {arr['eth']['address']} пустой")
 
     else:
-        print(page.status_code)
+        print(f"eth {page.status_code}")
         await asyncio.sleep(100)
 
 async def main():
