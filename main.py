@@ -98,6 +98,7 @@ async def check_eth(arr: dict) -> None:
         await asyncio.sleep(100)
 
 async def main():
+    print("start")
     while True:
         gen = Wall()
         gen.G()
@@ -108,5 +109,5 @@ async def main():
         await btc_
         await asyncio.sleep(4)
 
-
-asyncio.run(main())
+if __name__ == "__main__":
+    asyncio.run(main())
